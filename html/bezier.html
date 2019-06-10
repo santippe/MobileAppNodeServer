@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>No doc!</title>
+</head>
+
+<body>
+    <canvas id="canvas">
+
+    </canvas>
+    <div id="display" style="position: absolute;bottom: 0px;left: 0px;font-size: 30px"></div>
+    <script>
+        let canvas = document.querySelector('#canvas')
+        let display = document.querySelector('#display')
+        canvas.setAttribute('width', canvas.offsetWidth)
+        let ctx = canvas.getContext("2d")
+        ctx.beginPath();
+        ctx.moveTo(20, 20);
+        ctx.bezierCurveTo(20, 100, 200, 100, 200, 20);
+        ctx.stroke();        
+        let ppPoints = []
+        let addPointTo = e => {
+            if (e.touches.length > 0) {
+                let touch = e.touches[0]
+                display.innerHTML = touch.clientX + " " + touch.clientY
+            }
+            if (ppPoints.length < 2)
+                ppPoints.push({
+                    clientX,
+                    clientY
+                })
+            else
+                ctx.qua        
+        }
+        window.addEventListener("touchstart", addPointTo, false)
+        window.addEventListener("touchmove", addPointTo, false)
+        // window.addEventListener("resize",()=>{
+        //     canvas.setAttribute('width',canvas.offsetWidth)
+        // },false)
+    </script>
+</body>
+
+</html>
