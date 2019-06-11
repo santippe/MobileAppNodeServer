@@ -1,0 +1,6 @@
+let myArr = Array(10)
+myArr.fill(0)
+myArr.splice(myArr.length-1,1)
+myArr.push(3)
+console.log(...myArr)
+console.log(myArr.length)
