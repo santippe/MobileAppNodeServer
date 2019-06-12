@@ -1,12 +1,14 @@
-body{
+body {
     margin: 0px;
-    padding: 0px;    
+    padding: 0px;
 }
-#main{
-    background-color: #AAA,
+
+#main {
+    background-color: #AAA;
     background-repeat: repeat;
-    background-position: center center;    
+    background-position: center center;
 }
-*{
+
+* {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
