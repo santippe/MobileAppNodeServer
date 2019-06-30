@@ -1,8 +1,10 @@
 const http = require('http');
 const fs = require('fs');
+const sqlite3 = require('sqlite3').verbose();
 let serverOptions = {
 
-};
+}
+let db = new sqlite3.Database(':memory:')
 let server = http.createServer((req, res) => {    
     res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
     let pattino = req.url.split('/').slice(1);
