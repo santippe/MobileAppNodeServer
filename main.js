@@ -1,6 +1,13 @@
 const http = require('http');
 const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
+let generateKey = () =>{
+    let output = ''
+    while(output.length<16){
+        output+=String.fromCharCode(Math.ceil(Math.random()*256))
+    }    
+    return output
+}
 let serverOptions = {
 
 }
@@ -22,7 +29,9 @@ let server = http.createServer((req, res) => {
         } else if (cmd=='storeUser'){
             //generate key
         } else if (cmd =='login'){
-
+            //verify on database email and password
+            //generate key
+            res.write(generateKey())
         } else if (cmd=='storesession'){
             
         }
