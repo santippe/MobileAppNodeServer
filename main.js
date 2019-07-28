@@ -11,7 +11,9 @@ let generateKey = () => {
 let serverOptions = {
 
 }
-let db = new sqlite3.Database(':memory:')
+
+//let db = new sqlite3.Database(':memory:')
+let db = new sqlite3.Database('./data/data.db')
 let server = http.createServer((req, res) => {
     res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
     let pattino = req.url.split('/').slice(1);
@@ -25,26 +27,25 @@ let server = http.createServer((req, res) => {
         let cmd = pattino[1]
         if (cmd == 'givesome') {
             //read from database
-            //get a list of user as demo            
-            db.serialize(() => {
-                db.each(`SELECT * FROM USER`, (err, row) => {
-                        if (err) {
-                            console.error(err.message);
-                        }
-                        res.write(row.id + "\t" + row.name);
-                    });
-            })
+            //get a list of user as demo    
+            db.each(`SELECT * FROM USERS`, (err, row) => {
+                if (err) {
+                    console.error(err.message);
+                }
+                res.write(row.ID + "\t" + row.name+"\r\n");                
+            },()=>{res.end()})
             //res.write('test');
         } else if (cmd == 'storeUser') {
             //generate key
+            res.end();
         } else if (cmd == 'login') {
             //verify on database email and password
             //generate key
             res.write(generateKey())
+            res.end();
         } else if (cmd == 'storesession') {
-
-        }
-        res.end();
+            res.end();
+        }        
     } else {
         if (myRes.length == 1) {
             pattino.unshift('html');
