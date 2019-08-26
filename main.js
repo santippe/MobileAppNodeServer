@@ -28,15 +28,14 @@ let server = http.createServer((req, res) => {
         if (cmd == 'givesome') {
             //read from database
             //get a list of user as demo    
-            db.each(`SELECT * FROM USERS WHERE ID = ?`,[4],(err, row) => {
+            db.each(`SELECT * FROM USERS WHERE ID = ? 
+                AND [password] = ?`,[4,''],(err, row) => {
                 if (err) {
                     console.error(err.message);
                 }
                 res.write(row.ID + "\t" + row.name+"\r\n");
-            },
-            //add this or with empty resp no response will be closed
-            (err,count)=>{res.end();})
-            //res.write('test');
+            },            
+            (err,count)=>{res.end();})            
         } else if (cmd == 'storeUser') {
             //generate key
             res.end();
