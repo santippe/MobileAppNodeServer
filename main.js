@@ -28,18 +28,21 @@ let server = http.createServer((req, res) => {
         if (cmd == 'givesome') {
             //read from database
             //get a list of user as demo    
-            db.each(`SELECT * FROM USERS`, (err, row) => {
+            db.each(`SELECT * FROM USERS WHERE ID = ?`,[4],(err, row) => {
                 if (err) {
                     console.error(err.message);
                 }
-                res.write(row.ID + "\t" + row.name+"\r\n");                
-            },()=>{res.end()})
+                res.write(row.ID + "\t" + row.name+"\r\n");
+            },
+            //add this or with empty resp no response will be closed
+            (err,count)=>{res.end();})
             //res.write('test');
         } else if (cmd == 'storeUser') {
             //generate key
             res.end();
         } else if (cmd == 'login') {
             //verify on database email and password
+            
             //generate key
             res.write(generateKey())
             res.end();
