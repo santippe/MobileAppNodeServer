@@ -28,26 +28,26 @@ let server = http.createServer((req, res) => {
         if (cmd == 'givesome') {
             //read from database
             //get a list of user as demo    
-            db.each(`SELECT * FROM USERS WHERE ID = ? 
-                AND [password] = ?`,[4,''],(err, row) => {
-                if (err) {
-                    console.error(err.message);
-                }
-                res.write(row.ID + "\t" + row.name+"\r\n");
-            },            
-            (err,count)=>{res.end();})            
+            db.each(`SELEFCT * FROM USERS WHERE ID = ? AND [password] = ?`,
+                [4, null], (err, row) => {
+                    if (err) {
+                        console.error(err.message);
+                    }
+                    res.write(row.ID + "\t" + row.name + "\r\n");
+                },
+                (err, count) => { res.end(); })
         } else if (cmd == 'storeUser') {
             //generate key
             res.end();
         } else if (cmd == 'login') {
             //verify on database email and password
-            
+
             //generate key
             res.write(generateKey())
             res.end();
         } else if (cmd == 'storesession') {
             res.end();
-        }        
+        }
     } else {
         if (myRes.length == 1) {
             pattino.unshift('html');
